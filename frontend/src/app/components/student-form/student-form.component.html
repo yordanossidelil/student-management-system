@@ -9,13 +9,13 @@
 
         <div class="form-group">
           <label>Student ID *</label>
-          <input formControlName="studentId" placeholder="e.g. STU001" />
-          <span class="hint">Must start with <strong>STU</strong> followed by 3+ digits (e.g. STU001)</span>
+          <input formControlName="studentId" placeholder="e.g. STU0012" />
+          <span class="hint">Must start with <strong>STU</strong> followed by exactly 4 digits — e.g. STU0012</span>
           <span class="field-error" *ngIf="f['studentId'].touched && f['studentId'].errors?.['required']">
             Student ID is required
           </span>
           <span class="field-error" *ngIf="f['studentId'].touched && f['studentId'].errors?.['pattern']">
-            Must start with STU followed by digits — e.g. STU001
+            Format: STU + 4 digits — e.g. STU0012
           </span>
         </div>
 
@@ -85,10 +85,10 @@
 
       <div class="form-group">
         <label>Phone</label>
-        <input formControlName="phone" placeholder="e.g. +1 555 000 0000" />
-        <span class="hint">Optional — 7 to 15 digits, e.g. +1 555 000 0000</span>
+        <input formControlName="phone" placeholder="e.g. 0912345678" />
+        <span class="hint">Must start with <strong>09</strong> or <strong>07</strong> and be exactly 10 digits — e.g. 0912345678</span>
         <span class="field-error" *ngIf="f['phone'].touched && f['phone'].errors?.['pattern']">
-          Enter a valid phone number — e.g. +1 555 000 0000
+          Phone must start with 09 or 07 and be exactly 10 digits — e.g. 0912345678
         </span>
       </div>
 
