@@ -1,0 +1,33 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+
+  <div class="stats-grid">
+    <div class="stat-card primary">
+      <span class="stat-icon">👥</span>
+      <div>
+        <p class="stat-label">Total Students</p>
+        <p class="stat-value">{{ totalStudents }}</p>
+      </div>
+    </div>
+    <div class="stat-card success">
+      <span class="stat-icon">🏫</span>
+      <div>
+        <p class="stat-label">Departments</p>
+        <p class="stat-value">{{ departmentEntries.length }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Students by Department</h2>
+    <div class="dept-list" *ngIf="departmentEntries.length; else noData">
+      <div class="dept-item" *ngFor="let entry of departmentEntries">
+        <span class="dept-name">{{ entry[0] }}</span>
+        <span class="dept-count">{{ entry[1] }} students</span>
+      </div>
+    </div>
+    <ng-template #noData>
+      <p class="empty">No students yet. <a routerLink="/students/new">Add one</a>.</p>
+    </ng-template>
+  </div>
+</div>

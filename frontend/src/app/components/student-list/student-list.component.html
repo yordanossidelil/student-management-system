@@ -1,0 +1,62 @@
+<div class="student-list">
+  <div class="list-header">
+    <h1>Students</h1>
+    <a routerLink="/students/new" class="btn btn-primary">+ Add Student</a>
+  </div>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search by name, ID, or department..."
+      [(ngModel)]="search"
+      (ngModelChange)="onSearch($event)"
+    />
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+  <div class="loading" *ngIf="loading">Loading...</div>
+
+  <div class="table-wrapper" *ngIf="!loading">
+    <table *ngIf="students.length; else empty">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Year</th>
+          <th>GPA</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of students">
+          <td>{{ s.studentId }}</td>
+          <td>{{ s.name }}</td>
+          <td>{{ s.email }}</td>
+          <td><span class="badge">{{ s.department }}</span></td>
+          <td>Year {{ s.year }}</td>
+          <td>{{ s.gpa ?? '—' }}</td>
+          <td class="actions">
+            <a [routerLink]="['/students/edit', s._id]" class="btn btn-sm btn-edit">Edit</a>
+            <button class="btn btn-sm btn-delete" (click)="delete(s._id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #empty>
+      <p class="empty">No students found.</p>
+    </ng-template>
+  </div>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button *ngFor="let p of [].constructor(totalPages); let i = index"
+      [class.active]="page === i + 1"
+      (click)="changePage(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <p class="total-count">Total: {{ total }} student(s)</p>
+</div>

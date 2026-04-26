@@ -1,0 +1,88 @@
+.form-page {
+  display: flex;
+  justify-content: center;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 700px;
+
+  h1 {
+    font-size: 1.6rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.4rem;
+  }
+
+  input {
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s;
+
+    &:focus { border-color: #6366f1; }
+    &.ng-invalid.ng-touched { border-color: #dc2626; }
+  }
+}
+
+.field-error {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+
+  &-cancel { background: #f1f5f9; color: #475569; }
+  &-submit { background: #6366f1; color: #fff; &:disabled { opacity: 0.6; cursor: not-allowed; } }
+}
+
+.error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,71 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1e293b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  gap: 2rem;
+  position: fixed;
+  height: 100vh;
+
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.5rem 0;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+      color: #94a3b8;
+      text-decoration: none;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+
+      &:hover,
+      &.active {
+        background: #334155;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  background: #f1f5f9;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+
+    nav {
+      flex-direction: row;
+    }
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
