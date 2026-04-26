@@ -5,7 +5,7 @@ import { Student, StudentResponse } from '../models/student.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentService {
-  private apiUrl = 'http://localhost:5000/api/students';
+  private apiUrl = '/api/students';
 
   constructor(private http: HttpClient) {}
 

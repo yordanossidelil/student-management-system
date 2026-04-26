@@ -27,13 +27,13 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      studentId: ['', Validators.required],
-      name: ['', Validators.required],
+      studentId: ['', [Validators.required, Validators.pattern(/^STU\d{3,}$/i)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       department: ['', Validators.required],
       year: ['', [Validators.required, Validators.min(1), Validators.max(6)]],
       gpa: [null, [Validators.min(0), Validators.max(4)]],
-      phone: [null],
+      phone: [null, Validators.pattern(/^[+]?[\d\s\-().]{7,15}$/)],
     });
 
     this.studentId = this.route.snapshot.paramMap.get('id') || '';

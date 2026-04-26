@@ -6,56 +6,90 @@
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="form-row">
+
         <div class="form-group">
           <label>Student ID *</label>
           <input formControlName="studentId" placeholder="e.g. STU001" />
-          <span class="field-error" *ngIf="f['studentId'].touched && f['studentId'].invalid">
+          <span class="hint">Must start with <strong>STU</strong> followed by 3+ digits (e.g. STU001)</span>
+          <span class="field-error" *ngIf="f['studentId'].touched && f['studentId'].errors?.['required']">
             Student ID is required
           </span>
+          <span class="field-error" *ngIf="f['studentId'].touched && f['studentId'].errors?.['pattern']">
+            Must start with STU followed by digits — e.g. STU001
+          </span>
         </div>
+
         <div class="form-group">
           <label>Full Name *</label>
           <input formControlName="name" placeholder="e.g. John Doe" />
-          <span class="field-error" *ngIf="f['name'].touched && f['name'].invalid">
+          <span class="hint">At least 2 characters</span>
+          <span class="field-error" *ngIf="f['name'].touched && f['name'].errors?.['required']">
             Name is required
           </span>
+          <span class="field-error" *ngIf="f['name'].touched && f['name'].errors?.['minlength']">
+            Name must be at least 2 characters
+          </span>
         </div>
+
       </div>
 
       <div class="form-row">
+
         <div class="form-group">
           <label>Email *</label>
-          <input formControlName="email" type="email" placeholder="e.g. john@example.com" />
-          <span class="field-error" *ngIf="f['email'].touched && f['email'].invalid">
-            Valid email is required
+          <input formControlName="email" type="email" placeholder="e.g. john@university.edu" />
+          <span class="hint">Must be a valid email address</span>
+          <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+            Email is required
+          </span>
+          <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+            Enter a valid email — e.g. john&#64;university.edu
           </span>
         </div>
+
         <div class="form-group">
           <label>Department *</label>
           <input formControlName="department" placeholder="e.g. Computer Science" />
-          <span class="field-error" *ngIf="f['department'].touched && f['department'].invalid">
+          <span class="hint">e.g. Computer Science, Electrical Engineering</span>
+          <span class="field-error" *ngIf="f['department'].touched && f['department'].errors?.['required']">
             Department is required
           </span>
         </div>
+
       </div>
 
       <div class="form-row">
+
         <div class="form-group">
           <label>Year *</label>
-          <input formControlName="year" type="number" min="1" max="6" placeholder="1–6" />
-          <span class="field-error" *ngIf="f['year'].touched && f['year'].invalid">
+          <input formControlName="year" type="number" min="1" max="6" placeholder="1" />
+          <span class="hint">Academic year between 1 and 6</span>
+          <span class="field-error" *ngIf="f['year'].touched && f['year'].errors?.['required']">
+            Year is required
+          </span>
+          <span class="field-error" *ngIf="f['year'].touched && (f['year'].errors?.['min'] || f['year'].errors?.['max'])">
             Year must be between 1 and 6
           </span>
         </div>
+
         <div class="form-group">
           <label>GPA</label>
-          <input formControlName="gpa" type="number" step="0.01" min="0" max="4" placeholder="0.00–4.00" />
+          <input formControlName="gpa" type="number" step="0.01" min="0" max="4" placeholder="e.g. 3.75" />
+          <span class="hint">Optional — between 0.00 and 4.00</span>
+          <span class="field-error" *ngIf="f['gpa'].touched && (f['gpa'].errors?.['min'] || f['gpa'].errors?.['max'])">
+            GPA must be between 0.00 and 4.00
+          </span>
         </div>
+
       </div>
 
       <div class="form-group">
         <label>Phone</label>
         <input formControlName="phone" placeholder="e.g. +1 555 000 0000" />
+        <span class="hint">Optional — 7 to 15 digits, e.g. +1 555 000 0000</span>
+        <span class="field-error" *ngIf="f['phone'].touched && f['phone'].errors?.['pattern']">
+          Enter a valid phone number — e.g. +1 555 000 0000
+        </span>
       </div>
 
       <div class="form-actions">

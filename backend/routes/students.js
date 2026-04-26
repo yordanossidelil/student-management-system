@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const Student = require('../models/Student');
 
+function sanitize(body) {
+  const data = { ...body };
+  if (data.year !== undefined) data.year = Number(data.year);
+  if (data.gpa !== undefined) data.gpa = data.gpa === '' || data.gpa === null ? null : Number(data.gpa);
+  if (data.phone !== undefined) data.phone = data.phone === '' ? null : data.phone;
+  return data;
+}
+
 // GET /api/students?search=&page=1&limit=10
 router.get('/', async (req, res, next) => {
   try {
@@ -44,7 +52,7 @@ router.get('/:id', async (req, res, next) => {
 // POST /api/students
 router.post('/', async (req, res, next) => {
   try {
-    const student = await Student.create(req.body);
+    const student = await Student.create(sanitize(req.body));
     res.status(201).json(student);
   } catch (err) {
     next(err);
@@ -54,7 +62,7 @@ router.post('/', async (req, res, next) => {
 // PUT /api/students/:id
 router.put('/:id', async (req, res, next) => {
   try {
-    const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
+    const student = await Student.findByIdAndUpdate(req.params.id, sanitize(req.body), {
       new: true,
       runValidators: true,
     });
